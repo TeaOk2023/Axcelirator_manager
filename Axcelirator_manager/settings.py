@@ -1,4 +1,5 @@
 from pathlib import Path
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -118,6 +119,18 @@ LOGOUT_REDIRECT_URL = 'posts'
 LOGOUT_URL = 'posts' # редирект после выхода
 LOGIN_REDIRECT_URL = 'posts' # редирект после регистрации
 LOGIN_URL = 'account:login' # редирект если нужна авторизация
+
+
+#Для рассылки писем(оповещений) лимит 100 писем в день только!!! не тестируйте слишком
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+
+# Если включить, то письма будут в консоль идти (для тестов)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 # AUTHENTICATION_BACKENDS = [

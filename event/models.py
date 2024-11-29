@@ -30,6 +30,11 @@ class Competition(models.Model):
     class Meta:
         ordering = ['start_time']
 
+
+        # permissions = [
+        #     ("can_manage_competitions", "Can manage competitions"),
+        # ]
+
     #Поменяю на choose
     @property
     def event_status(self):
@@ -67,8 +72,7 @@ class Team(models.Model):
 
     @property
     def get_member_count(self):
-        return self.members.count()
-        # Возвращает количество участников
+        return self.members.count()  # Возвращает количество участников
 
 
 class TeamRegistration(models.Model):
@@ -81,3 +85,5 @@ class TeamRegistration(models.Model):
 
     def __str__(self):
         return str(self.competition) + '----' + str(self.team)
+
+
