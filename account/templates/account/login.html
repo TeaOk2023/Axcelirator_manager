@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}" />
+        {% include 'account/includes/for_cycle_form.html' %}
+        <p><button type="submit">Войти</button></p>
+        <p><a href="{% url 'account:password_reset' %}">Забыли пароль?</a></p>
+        <p><a href="{% url 'account:register' %}">Зарегистрироваться</a></p>
+    </form>
+    <hr>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block header %}
+    {% include "event/includes/header.html" %}
+{% endblock %}
+
+{% block content %}
+
+    <h1>Мои команды</h1>
+    <div>
+        {% for team in teams %}
+            <div class="team">
+                <h2>{{ team.name }}</h2>
+                <p><strong>Лидер: </strong> {{ team.leader_id }}</p>
+                <p><strong>Участники:</strong>
+                    {% for member in team.members.all %}
+                        {{ member.username }},
+                    {% endfor %}
+                </p>
+                <p><strong>Количество участников: </strong> {{ team.get_member_count }}</p>
+                <p><strong>На мероприятие:</strong> {{ team.competition.title }}</p>
+                <button> <a href="{% url 'team_detail' team.id %}">Обзор</a></button>
+            </div>
+        {% empty %}
+            <p>Вы, не состоите в команде.</p>
+        {% endfor %}
+    </div>
+
+{% endblock %}

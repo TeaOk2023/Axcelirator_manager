@@ -1,0 +1,31 @@
+{% load static %}
+
+<header>
+    <div class="wrapper">
+        <h1 class="logo">Site_<span>Logo</span></h1>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="{% url 'posts' %}">Мероприятия</a></li>
+                {#            {% url 'team_search' %}#}
+                <li><a href="{% url 'team_search' %}"><i class="fa fa-info nav-icon"></i>Поиск команды</a></li>
+
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'my_teams' %}"><i class="fa fa-envelope nav-icon"></i>Мои команды</a></li>
+                    <li><a href="{% url 'account:profile' %}">{{ user.username }}</a></li>
+                    <form method="post" action="{% url 'account:logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">Выйти</button>
+                    </form>
+                {% else %}
+                    <li><a href="{% url 'account:login' %}">Вход</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+
+        <div class="menu-toggle">
+            <div class="hamburger"></div>
+        </div>
+
+    </div>
+</header>

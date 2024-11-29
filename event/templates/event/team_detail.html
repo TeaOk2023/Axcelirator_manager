@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block header %}
+    {% include "event/includes/header.html" %}
+{% endblock %}
+
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+{#        {% if team.is_draft %}#}
+{#            <button type="submit">Сохранить изменения</button>#}
+{#            <a href="{% url 'submit_team' team.pk %}" class="btn btn-primary">Подать заявку</a>#}
+{#        {% else %}#}
+{#            <p>Заявка уже отправлена.</p>#}
+{#        {% endif %}#}
+    </form>
+
+    <h2>Запрос на участие в мероприятии:</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ participation_form.as_p }}
+        <button type="submit">Отправить заявку</button>
+    </form>
+{% endblock %}

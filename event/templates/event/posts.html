@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block header %}
+    {% include "event/includes/header.html" %}
+{% endblock %}
+
+{% block content %}
+    <h1>Все мероприятия</h1>
+    <div>
+        {% for competition in competitions %}
+            <div class="competition">
+                <h2>{{ competition.name }}</h2>
+                <p><strong>Описание:</strong> {{ competition.description }}</p>
+                <p><strong>Дата начала:</strong> {{ competition.start_time }}</p>
+                <p><strong>Дата окончания:</strong> {{ competition.end_time }}</p>
+                <p><strong>Срок регистрации:</strong> {{ competition.registration_deadline }}</p>
+                <p><strong>Место проведения:</strong> {{ competition.location }}</p>
+                <p><strong>Статус:</strong> {{ competition.event_status }}</p>
+
+                {% if user.is_authenticated %}
+                    {# competition.id#}
+                    <form method="post" action="{% url 'create_team' competition.id %}">
+                        {% csrf_token %}
+                        <button id="participate-button" type="submit">Создать команду</button>
+                    </form>
+                    <form method="post" action="{% url 'team_search' %}">
+                        {% csrf_token %}
+                        <button id="participate-button" type="submit">Найти команду</button>
+                    </form>
+                {% endif %}
+
+            </div>
+        {% empty %}
+            <p>Нет доступных соревнований.</p>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block header %}
+    {% include "event/includes/header.html" %}
+{% endblock %}
+
+
+{% block content %}
+    <h1>Team Create</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Создать команду</button>
+    </form>
+{% endblock %}

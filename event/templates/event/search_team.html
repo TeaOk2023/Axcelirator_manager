@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block header %}
+    {% include "event/includes/header.html" %}
+{% endblock %}
+
+{% block content %}
+
+    <h1>Варианты команд</h1>
+    <div>
+        {% for team in teams %}
+            <div class="team">
+                <h2>{{ team.name }}</h2>
+                <p><strong>Лидер: </strong> {{ team.leader_id }}</p>
+                {#                <p><strong>Количество участники:</strong> {{ team.get_member_count }}</p>#}
+                <p><strong>Участники:</strong>
+                    {% for member in team.members.all %}
+                        {{ member.username }},
+                    {% endfor %}
+                </p>
+                <p><strong>На мероприятие:</strong> {{ team.competition.title }}</p>
+
+
+            </div>
+        {% empty %}
+            <p>Нет доступных вариантов</p>
+        {% endfor %}
+    </div>
+
+{% endblock %}

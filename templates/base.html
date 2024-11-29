@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link type="text/css" href="{% static "css/base.css" %}" rel="stylesheet">
+    <script src="{% static 'js/header.js' %}"></script>
+{#    хз как фиксить пока лень#}
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'event/js/choose.js' %}"></script>
+</head>
+<body>
+<div class="main">
+    <div class="header">
+        {% block header %}
+        {% endblock header %}
+    </div>
+
+    <div class="content">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+</div>
+
+</body>
+</html>
