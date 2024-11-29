@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
@@ -8,10 +8,8 @@ from django.contrib import messages
 
 
 def index(request):
-    return HttpResponse("<h1>Landing</h1>")
+    return render(request, 'event/landing.html')
 
-def search_team(request):
-    return HttpResponse("<h1>Search Team</h1>")
 
 def index2(request, competition_id):
     return render(request, "event/index.html")
@@ -84,3 +82,5 @@ class SearchTeam(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Team.objects.all().filter(is_search_members = True) # пока так
+
+

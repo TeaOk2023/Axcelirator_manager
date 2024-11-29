@@ -4,10 +4,15 @@ from account.models import User
 from .models import Team
 
 class TeamCreationForm(forms.ModelForm):
+    members = forms.ModelMultipleChoiceField(
+        queryset=User.objects.all(),
+        widget=forms.SelectMultiple(attrs={'class': 'js-selectize'}),  # Для использования selectize.js
+        required=False,  # Делаем поле необязательным
+    )
+
     class Meta:
         model = Team
-        fields = ['name', 'members'] # Добавьте сюда все необходимые поля
-        widgets = {
-          'members': forms.CheckboxSelectMultiple()  #Или другой виджет, который вам подходит.
-        }
+        fields = ['name',  'members'] # Добавьте сюда все необходимые поля
+
+
 

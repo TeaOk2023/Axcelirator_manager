@@ -9,7 +9,7 @@
     <div>
         {% for competition in competitions %}
             <div class="competition">
-                <h2>{{ competition.name }}</h2>
+                <h2>{{ competition.title }}</h2>
                 <p><strong>Описание:</strong> {{ competition.description }}</p>
                 <p><strong>Дата начала:</strong> {{ competition.start_time }}</p>
                 <p><strong>Дата окончания:</strong> {{ competition.end_time }}</p>
@@ -23,10 +23,7 @@
                         {% csrf_token %}
                         <button id="participate-button" type="submit">Создать команду</button>
                     </form>
-                    <form method="post" action="{% url 'team_search' %}">
-                        {% csrf_token %}
-                        <button id="participate-button" type="submit">Найти команду</button>
-                    </form>
+                    <button id="participate-button"><a href="{% url 'team_search' %}">Найти команду</a></button>
                 {% endif %}
 
             </div>

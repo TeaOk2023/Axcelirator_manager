@@ -19,7 +19,7 @@
                 </p>
                 <p><strong>Количество участников: </strong> {{ team.get_member_count }}</p>
                 <p><strong>На мероприятие:</strong> {{ team.competition.title }}</p>
-                <button> <a href="{% url 'team_detail' team.id %}">Обзор</a></button>
+                <button><a href="{% url 'team_detail' team.id %}">Обзор</a></button>
             </div>
         {% empty %}
             <p>Вы, не состоите в команде.</p>
