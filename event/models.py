@@ -29,8 +29,6 @@ class Competition(models.Model):
 
     class Meta:
         ordering = ['start_time']
-
-
         # permissions = [
         #     ("can_manage_competitions", "Can manage competitions"),
         # ]
@@ -56,13 +54,10 @@ class Team(models.Model):
     name = models.CharField(max_length=200, null=False)
     leader_id = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, on_delete=models.CASCADE, related_name='leader')
     members = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='members')
-    # One to One наверное нужно (команда только на 1 мероприятие)
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE, related_name='competition')
     is_search_members = models.BooleanField(default=False)
     is_draft = models.BooleanField(default=True)  # Черновик или уже нет
 
-    #created_at = models.DateTimeField(auto_now_add=True)
-    #2updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name

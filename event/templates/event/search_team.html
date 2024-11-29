@@ -20,6 +20,10 @@
                 </p>
                 <p><strong>На мероприятие:</strong> {{ team.competition.title }}</p>
 
+                <form method="post" action="{% url 'create_team' competition.id %}">
+                    {% csrf_token %}
+                    <button id="participate-button" type="submit">Создать команду</button>
+                </form>
 
             </div>
         {% empty %}

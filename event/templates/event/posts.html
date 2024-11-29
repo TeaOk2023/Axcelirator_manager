@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load static %}
 
 {% block header %}
     {% include "event/includes/header.html" %}
@@ -11,7 +10,6 @@
         {% for competition in competitions %}
             <div class="competition">
                 <div class="card_top">
-                    <img src="{% static "tour_bkg.png" %}" alt="">
                     <div class="card_name">{{ competition.title }}</div>
                 </div>
                 <div class="card_bottom">

@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -29,7 +31,8 @@ class MyTeams(LoginRequiredMixin, ListView):
     context_object_name = "teams"
 
     def get_queryset(self):
-        return Team.objects.all() # пока так
+        return Team.objects.all().filter(members=self.request.user) # пока так
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
