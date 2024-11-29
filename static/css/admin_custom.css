@@ -1,0 +1,21 @@
+#app-list-sidebar ul li {
+    margin: 5px 0;
+}
+
+#app-list-sidebar ul li a {
+    text-decoration: none;
+    color: #007bff;
+    pointer-events: auto; /* Ссылка активна по умолчанию */
+}
+
+#app-list-sidebar ul li a.disabled {
+    color: #aaa;
+    pointer-events: none; /* Отключение клика */
+    cursor: default;
+}
+
+#app-list-sidebar ul li.active a {
+    font-weight: bold;
+    color: #333;
+    pointer-events: none; /* Отключение активной ссылки */
+}

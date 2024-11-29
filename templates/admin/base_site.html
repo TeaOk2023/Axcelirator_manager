@@ -1,0 +1,29 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block sidebar %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/admin_custom.css' %}">
+<script src="{% static 'js/admin_custom.js' %}"></script>
+<div class="custom-sidebar">
+    <ul>
+        {% for app in app_list %}
+            <li>
+                <a href="#">{{ app.name }}</a>
+                <ul>
+                    {% for model in app.models %}
+                        <li><a href="{{ model.admin_url }}">{{ model.name }}</a></li>
+                        <li>ZALUPA</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="custom-content">
+    {{ block.super }}
+</div>
+{% endblock %}
+

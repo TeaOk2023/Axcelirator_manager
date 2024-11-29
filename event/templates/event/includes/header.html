@@ -10,6 +10,9 @@
                 <li><a href="{% url 'team_search' %}"><i class="fa fa-info nav-icon"></i>Поиск команды</a></li>
 
                 {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                        <li><a href="/admin/" class="btn btn-primary">Перейти в модерацию</a></li>
+                    {% endif %}
                     <li><a href="{% url 'my_teams' %}"><i class="fa fa-envelope nav-icon"></i>Мои команды</a></li>
                     <li><a href="{% url 'account:profile' %}">{{ user.username }}</a></li>
                     <form method="post" action="{% url 'account:logout' %}">
