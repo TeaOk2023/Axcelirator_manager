@@ -12,7 +12,7 @@ class TeamCreationForm(forms.ModelForm):
 
     class Meta:
         model = Team
-        fields = ['name', 'members'] # Добавьте сюда все необходимые поля
+        fields = ['name',  'members'] # Добавьте сюда все необходимые поля
 
 
 
