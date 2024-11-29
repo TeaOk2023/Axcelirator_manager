@@ -1,9 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
 
+:root {
+    --main-color: #C73006;
+    --second-color: #efefef;
+    --breadcrumbs-fg: #464655;
+}
+
 body {
     margin: 0;
     padding: 0;
-    background: #efefef;
+    background: var(--second-color);
     font-family: 'QuickSand', sans-serif;
 }
 
@@ -14,8 +20,8 @@ body {
 }
 
 header {
-    background: #04AA6D;
-    color: #efefef;
+    background: var(--main-color);
+    color: var(--second-color);
 
     position: relative;
     padding: 1em 0;
@@ -44,7 +50,7 @@ header::after {
     top: 100%;
     right: 0;
     left: 0;
-    background: #464655;
+    background: var(--breadcrumbs-fg);
     height: 0;
     overflow: hidden;
 }
@@ -79,7 +85,7 @@ header::after {
 .main-nav a:hover,
 .main-nav a:focus {
     background: #e4b363;
-    color: #464655;
+    color: var(--breadcrumbs-fg);
 }
 
 .nav-icon {
@@ -161,9 +167,8 @@ header::after {
     }
 }
 
-/*Не трогаем */
 button {
-    background-color: #04AA6D !important;
+    background-color: var(--main-color) !important;
     margin-bottom: 5px;
     border: none;
     color: white;
@@ -189,7 +194,7 @@ label.form-label {
 }
 
 a {
-    color: #12c064;
+    color: white;
     text-decoration: none;
 }
 
