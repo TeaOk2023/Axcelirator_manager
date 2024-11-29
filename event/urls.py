@@ -10,8 +10,6 @@ urlpatterns = [
     path('posts/<int:competition_id>/create-team/', CreateTeamView.as_view(), name='create_team'),
     #path('teams/<int:pk>/submit/', SubmitTeamView.as_view(), name='submit_team'),
 
-
-
     path('posts/<int:post_id>/', index, name='detail'),
     path('register_or_create_team/<int:competition_id>/', index2, name="reg_or_create")  #
 ]
