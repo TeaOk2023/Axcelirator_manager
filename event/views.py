@@ -12,16 +12,13 @@ from django.contrib import messages
 def index(request):
     return render(request, 'event/landing.html')
 
-
-def index2(request, competition_id):
-    return render(request, "event/index.html")
-
 class CompetitionPosts(ListView):
     model = Competition
     template_name = "event/posts.html"
     context_object_name = "competitions"
 
     def get_queryset(self):
+
         return Competition.objects.all()
 
 
