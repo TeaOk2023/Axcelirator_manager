@@ -50,8 +50,7 @@ class CreateTeamView(LoginRequiredMixin, CreateView):
         team.competition_id = Competition.objects.get(pk=self.kwargs['competition_id']).id # Получаем competition_id из URL
         team.save()
         team.members.add(self.request.user)
-        for user in form.cleaned_data['members']:
-            team.members.add(user)
+        team.members.add(*form.cleaned_data['members'])
 
         return redirect(team.get_absolute_url())
 
@@ -86,4 +85,16 @@ class SearchTeam(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Team.objects.all().filter(is_search_members = True) # пока так
 
+
+class CompetitionDetail(LoginRequiredMixin, UpdateView):
+    model = Competition
+    #form_class = TeamCreationForm
+    template_name = "event/competition_detail.html"
+    context_object_name = "competition"
+    pk_url_kwarg = "competition_id"
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 

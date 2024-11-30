@@ -43,6 +43,7 @@ class RegisterUserForm(UserCreationForm):
 class ProfileUserForm(forms.ModelForm):
 
     username = forms.CharField(disabled=True, widget=forms.TextInput(attrs={'class': 'form-input'}), label='Nickaname')
+    # id = forms.CharField(disabled=True, widget=forms.TextInput(attrs={'class': 'form-input'}), label='ID')
     email = forms.CharField(disabled=True, required=False, widget=forms.TextInput(attrs={'class': 'form-input'}), label='E-mail')
     this_year = datetime.date.today().year
     date_birth = forms.DateTimeField(widget=forms.SelectDateWidget(years=tuple(range(this_year-5, this_year-100, -1))),
@@ -58,7 +59,7 @@ class ProfileUserForm(forms.ModelForm):
         widgets - dict - CSS-виджеты полей.
         """
         model = get_user_model()
-        fields = ('username', 'email', 'date_birth', 'first_name', 'last_name')
+        fields = ('username', 'email',  'date_birth', 'first_name', 'last_name')
         labels = {
             'first_name': 'Имя',
             'last_name': 'Фамилия',
