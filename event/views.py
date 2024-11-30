@@ -7,7 +7,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Competition, Team
 from .forms import *
 from django.contrib import messages
-
+from django.shortcuts import render
+from django.contrib.auth import get_user
 
 def index(request):
     return render(request, 'event/landing.html')
@@ -18,8 +19,19 @@ class CompetitionPosts(ListView):
     context_object_name = "competitions"
 
     def get_queryset(self):
+        set = Competition.objects.all()
+        current_user = self.request.user
+        if (current_user.id):
+            teams = Team.objects.all().filter(members=current_user)
 
-        return Competition.objects.all()
+            for comp in set:
+                t = False
+                for team in teams:
+                    if team.competition == comp:
+                        t=True
+                comp.registered = t
+
+        return set
 
 
 class MyTeams(LoginRequiredMixin, ListView):
@@ -83,15 +95,16 @@ class SearchTeam(LoginRequiredMixin, ListView):
         return Team.objects.all().filter(is_search_members = True) # пока так
 
 
-class CompetitionDetail(LoginRequiredMixin, UpdateView):
+class CompetitionDetail(LoginRequiredMixin, DetailView):
     model = Competition
     #form_class = TeamCreationForm
     template_name = "event/competition_detail.html"
     context_object_name = "competition"
     pk_url_kwarg = "competition_id"
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['teams'] = Team.objects.all().filter(competition=context['object'].id)
+
         return context
 

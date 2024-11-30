@@ -58,7 +58,6 @@ class Team(models.Model):
     is_search_members = models.BooleanField(default=False)
     is_draft = models.BooleanField(default=True)  # Черновик или уже нет
 
-
     def __str__(self):
         return self.name
 

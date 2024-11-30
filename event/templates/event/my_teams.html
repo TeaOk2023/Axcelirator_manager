@@ -6,24 +6,28 @@
 
 {% block content %}
 
-    <h1>Мои команды</h1>
-    <div>
-        {% for team in teams %}
-            <div class="team">
-                <h2>{{ team.name }}</h2>
-                <p><strong>Лидер: </strong> {{ team.leader_id }}</p>
-                <p><strong>Участники:</strong>
-                    {% for member in team.members.all %}
-                        {{ member.username }},
-                    {% endfor %}
-                </p>
-                <p><strong>Количество участников: </strong> {{ team.get_member_count }}</p>
-                <p><strong>На мероприятие:</strong> {{ team.competition.title }}</p>
-                <button><a href="{% url 'team_detail' team.id %}">Обзор</a></button>
-            </div>
-        {% empty %}
-            <p>Вы, не состоите в команде.</p>
-        {% endfor %}
+<h1>Мои команды</h1>
+<div>
+    {% for team in teams %}
+    <div class="competition3">
+        <div class="card_top2" style="width:200pt;">
+            <div class="card_name2">{{ team.name }}</div>
+        </div>
+        <div class="ard_bottom2">
+            <p><strong>Лидер: </strong> {{ team.leader_id }}</p>
+            <p><strong>Участники:</strong>
+                {% for member in team.members.all %}
+                    {{ member.username }},
+                {% endfor %}
+            </p>
+            <p><strong>Количество участников: </strong> {{ team.get_member_count }}</p>
+            <p><strong>На мероприятие:</strong> {{ team.competition.title }}</p>
+            <button><a href="{% url 'team_detail' team.id %}">Обзор</a></button>
+        </div>
     </div>
+    {% empty %}
+        <p>Вы, не состоите в команде.</p>
+    {% endfor %}
+</div>
 
 {% endblock %}

@@ -7,28 +7,33 @@
 {% block content %}
 
     <h1>Варианты команд</h1>
-    <div>
-        {% for team in teams %}
-            <div class="team">
-                <h2>{{ team.name }}</h2>
-                <p><strong>Лидер: </strong> {{ team.leader_id }}</p>
-                {#                <p><strong>Количество участники:</strong> {{ team.get_member_count }}</p>#}
-                <p><strong>Участники:</strong>
+    <table class="card_bottom3">
+        <thead>
+            <tr>
+                <th scope="col"><strong>Название: </strong></th>
+                <th scope="col"><strong>Лидер: </strong></th>
+                <th scope="col"><strong>Участники:</strong></th>
+                <th scope="col"><strong>На мероприятие:</strong></th>
+                <th scope="col"><strong>Подать заявку</strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for team in teams %}
+                <tr class="team">
+                    <td>{{ team.name }}</td>
+                    <td> {{ team.leader_id }}</td>
+                    <td>
                     {% for member in team.members.all %}
                         {{ member.username }},
                     {% endfor %}
-                </p>
-                <p><strong>На мероприятие:</strong> {{ team.competition.title }}</p>
-
-                <form method="post" action="{% url 'create_team' competition.id %}">
-                    {% csrf_token %}
-                    <button id="participate-button" type="submit">Создать команду</button>
-                </form>
-
-            </div>
-        {% empty %}
-            <p>Нет доступных вариантов</p>
-        {% endfor %}
-    </div>
+                    </td>
+                    <td>{{ team.competition.title }}</td>
+                    <td><button type="submit">Отправить заявку</button></td>
+                </tr>
+            {% empty %}
+                <p>Нет доступных вариантов</p>
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

@@ -17,19 +17,22 @@
                 <div class="card_bottom">
                     <p><strong>Описание:</strong> {{ competition.description }}</p>
                     <p><strong>Дата начала:</strong> {{ competition.start_time }}</p>
-                    <p><strong>Дата окончания:</strong> {{ competition.end_time }}</p>
-                    <p><strong>Срок регистрации:</strong> {{ competition.registration_deadline }}</p>
-                    <p><strong>Место проведения:</strong> {{ competition.location }}</p>
                     <p><strong>Статус:</strong> {{ competition.event_status }}</p>
 
                     {% if user.is_authenticated %}
                         {# competition.id#}
-                        <form method="post" action="{% url 'create_team' competition.id %}">
-                            {% csrf_token %}
-                            <button id="participate-button" type="submit">Создать команду</button>
-                        </form>
-                        <button><a href="{% url 'team_search' %}">Найти команду</a></button>
+
+                        {% if competition.registered %}
+                            <button class="disabled"><a class="disabled">Вы уже участник</a></button>
+                        {% else %}
+                            <form method="post" action="{% url 'create_team' competition.id %}">
+                                {% csrf_token %}
+                                <button id="participate-button" type="submit">Создать команду</button>
+                            </form>
+
+                        {% endif %}
                     {% endif %}
+                    <button><a href="{% url 'competition_detail' competition.id %}">Дополнительная информация</a></button>
                 </div>
             </div>
         {% empty %}

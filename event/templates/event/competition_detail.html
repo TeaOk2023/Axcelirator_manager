@@ -1,10 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
 
-</body>
-</html>
+{% block header %}
+    {% include "event/includes/header.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="competition2">
+    <div class="card_top2">
+        <div class="card_name2">{{ competition.title }}</div>
+    </div>
+    <div class="card_bottom2">
+        <p><strong>Описание:</strong> {{ competition.description }}</p>
+        <p><strong>Дисциплина:</strong> {{ competition.sport_name }}</p>
+        <p><strong>Дата начала:</strong> {{ competition.start_time }}</p>
+        <p><strong>Дата окончания:</strong> {{ competition.end_time }}</p>
+        <p><strong>Срок регистрации:</strong> {{ competition.registration_deadline }}</p>
+        <p><strong>Место проведения:</strong> {{ competition.location }}</p>
+        <p><strong>Статус:</strong> {{ competition.event_status }}</p>
+    </div>
+        <div class="card_top3">
+            <div class="card_name2">Список зарегистрированных команд:</div>
+        </div>
+    </div>
+    <table class="card_bottom3">
+        <thead>
+            <tr>
+              <th scope="col"><strong>Наименование:</strong></th>
+              <th scope="col"><strong>Кол-во участников:</strong></th>
+              <th scope="col"><strong>Ищет участников?</strong></th>
+              <th scope="col"><strong>Подать заявку</strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for team in teams %}
+                <tr>
+                    <td> {{ team.name }}</td>
+                    <td> {{ team.members.count }}</td>
+                    {% if team.is_search_members %}
+                        <td><strong style="color:green;"> Да </strong></td>
+                    {% else %}
+                        <td><strong style="color:red;"> Нет </strong></td>
+                    {% endif %}
+                    <td><button type="submit">Отправить заявку</button></td>
+                </tr>
+            {% empty %}
+                <td>Нет команд.</td>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
